@@ -6,19 +6,12 @@ int main ( )   {
   char playntext[128],chiave[128],ciphertext[128];
   int operazione,caratteri_chiave=0,caratteri_playntext=0;
   printf("benvenuto nell'algoritmo rc4 \n");
+  printf("attenzione il tuo testo non può superare i 128 caratteri se accadrà la parte in eccesso verrà tagliata\n");
   printf("scrivi il playntext: ");
   fgets( playntext,128,stdin);
-  /*prendo il numero di caratteri scritti come testo da cifrare e controllo che
-  non siano più di 128 se superano questo limite costringo l'utente a riscriverla
-  fino a che non rispetti la condizione,faccio il -1 per non contare il
+  /*faccio il -1 per non contare il
   carattere finale /o */
   caratteri_playntext=strlen(playntext)-1;
-  while (caratteri_playntext>127) {
-    printf("ERRORE:la stringa supera i 128 caratteri riprova\n");
-    printf("scrivi il playntext: ");
-    fgets( playntext,128,stdin);
-    caratteri_playntext=strlen(playntext)-1;
-  }
   /*ho deciso di mettere qua la decisione dell'utente su quale dei 2 metodi da
   usare per proseguire così da ridurre la lunghezza del programma non dovendo
   riscrivere 2 volte la parte del playntext (1 volta se l'utente sceglieva 1 e
@@ -34,10 +27,9 @@ int main ( )   {
     printf("scrivi la chiave di cifratura: ");
     fgets( chiave,128,stdin);
     caratteri_chiave=strlen(chiave)-1;
-    /*simile al controllo del playntext solo che qua controllo anche che la
-    chiave sia lunga almeno quanto il playntext*/
-    while ((caratteri_chiave>128)||(caratteri_chiave<caratteri_playntext)) {
-      printf("ERRORE:la stringa supera i 128 caratteri o è più piccola del testo riprova\n");
+    /*qua controllo che la chiave sia lunga almeno quanto il playntext*/
+    while (caratteri_chiave<caratteri_playntext) {
+      printf("ERRORE:la chiave è più piccola del testo riprova\n");
       printf("scrivi la chiave di cifratura: ");
       fgets( chiave,128,stdin);
       caratteri_chiave=strlen(chiave)-1;
